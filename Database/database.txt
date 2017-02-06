@@ -1,0 +1,70 @@
+CREATE TABLE test_user(
+ user_id NUMBER(4),
+ username VARCHAR2(20) UNIQUE NOT NULL,
+ password VARCHAR2(20) NOT NULL,
+ CONSTRAINT user_id_pk PRIMARY KEY(user_id)
+);
+
+CREATE SEQUENCE test_user_seq;
+
+INSERT INTO test_user VALUES (test_user_seq.nextVal, 'Alex', 'Alex');
+INSERT INTO test_user VALUES (test_user_seq.nextVal, 'Maruyama', 'Maruyama');
+INSERT INTO test_user VALUES (test_user_seq.nextVal, 'Nakai', 'Nakai');
+INSERT INTO test_user VALUES (test_user_seq.nextVal, 'Oikawa', 'Oikawa');
+
+CREATE TABLE test_admin(
+ admin_name VARCHAR2(20) UNIQUE NOT NULL,
+ CONSTRAINT admin_name_fk FOREIGN KEY(admin_name) REFERENCES test_user(username)
+);
+
+INSERT INTO test_admin VALUES ('Alex');
+INSERT INTO test_admin VALUES ('Maruyama');
+INSERT INTO test_admin VALUES ('Nakai');
+INSERT INTO test_admin VALUES ('Oikawa');
+
+CREATE TABLE test_thread(
+ thread_id NUMBER(4),
+ title VARCHAR2(50) NOT NULL UNIQUE,
+ creator VARCHAR2(20) NOT NULL,
+ created_date DATE DEFAULT SYSDATE NOT NULL,
+ last_update DATE DEFAULT SYSDATE NOT NULL,
+ last_username VARCHAR2(20) NOT NULL,
+ reply_nb NUMBER(4) DEFAULT 0 NOT NULL,
+ CONSTRAINT thread_id_pk PRIMARY KEY(thread_id),
+ CONSTRAINT thread_creator_fk FOREIGN KEY(creator) REFERENCES test_user(username),
+ CONSTRAINT thread_last_username_fk FOREIGN KEY(last_username) REFERENCES test_user(username)
+);
+
+CREATE SEQUENCE test_thread_seq;
+
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'TestThread', 'Alex', SYSDATE, SYSDATE, 'Alex', 0);
+
+CREATE TABLE test_comment(
+ comment_id NUMBER(4),
+ thread_id NUMBER(4),
+ commenter VARCHAR2(20),
+ content VARCHAR2(4000) NOT NULL,
+ created_date DATE DEFAULT SYSDATE NOT NULL,
+ CONSTRAINT comment_id_pk PRIMARY KEY(comment_id),
+ CONSTRAINT comment_commenter_fk FOREIGN KEY(commenter) REFERENCES test_user(username),
+ CONSTRAINT comment_thread_id_fk FOREIGN KEY(thread_id) REFERENCES test_thread(thread_id)
+);
+
+CREATE SEQUENCE test_comment_seq;
+
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Alex', 'TestComment', SYSDATE);
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Maruyama', 'TestComment2', SYSDATE);
+
+UPDATE test_thread SET reply_nb = 1 WHERE thread_id = 1;
+
+commit;
+
+--------------------------------------------------------------------------------------------------------
+
+DROP SEQUENCE test_comment_seq;
+DROP TABLE test_comment;
+DROP SEQUENCE test_thread_seq;
+DROP TABLE test_thread;
+DROP SEQUENCE test_user_seq;
+DROP TABLE test_admin;
+DROP TABLE test_user;
