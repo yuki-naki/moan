@@ -1,0 +1,155 @@
+﻿<!DOCTYPE HTML5>
+<html lang="ja">
+
+<head>
+<link rel="stylesheet" type="text/css" href="testcss.css" />
+  <!-- 参考http://bbs.sekkaku.net/bbs/A5.html-->
+<title>掲示板 サンプル </title>
+</head>
+
+
+<p id="title" >掲示板</p>        
+<p id="subtitle" >何か記念に書いてください！</p>
+
+<table id="border" width="735" border="0" >
+<tr>
+<td>
+<table width="100%" border="0" >
+<tr id="threadLine" > 
+<td id="threadLine" width="100">名前</td>
+<th id="comment" >
+<input type="text" name="name" size="60">
+</th>
+</tr>
+
+<tr id="threadLine" > 
+<td id="threadLine" width="100">タイトル</td>
+<td id="comment" >
+<input type="text" name="sub" size="60">
+</td>
+</tr> 
+
+<tr id="threadLine"> 
+<td id="threadLine" width="100">本文</td> 
+
+<td id="comment">
+<textarea name="mes" cols="60" rows="10"></textarea>
+</td>
+</tr>   
+<!--
+<tr id="threadLine"> 
+<td id="threadLine" width="100">アップロード</td>
+<td id="comment">
+<input type="file" name="file" size="60"><br>
+<input type="file" name="op11" size="60">
+</td>
+</tr>-->
+</table>
+</td>
+</tr>
+</table>
+<br><br>  
+
+<!--仮--> 
+<table id="border" width="730" border="0" >
+
+<td>
+<table width="100%" border="0" >
+<tr id="threadLine"> 
+<th id="res_titly" nowrap width="100">スレッドID</td>
+<th id="res_titly" nowrap width="350">スレッドタイトル</td>
+<th id="res_titly" nowrap width="80">スレッド作成者名</th>   
+<th id="res_titly" nowrap width="70">スレッド返信数</th>
+<th id="res_titly" nowrap width="150">作成日</th>
+<th id="res_titly" nowrap width="80">最終作成者</th>
+<th id="res_titly" nowrap width="60">最終更新日</th>
+<th id="res_titly" nowrap width="60" >favorite</th>
+</tr>
+
+<tr id="res_line"> 
+<td id="res_line" width="20" >${}thread_id</td> 
+<td id="res_line"> ${}thread_title
+<td id="res_line"> ${}creator
+<td id="res_line">${}reply_nb</td>
+<td id="res_line">${}created_date</td>
+<td id="res_line">${}last_user 
+<td id="res_line">${}last_update
+</td><td id="res_line">${}th_favorite 
+
+</td></tr>
+ 
+<tr id="res_line"> 
+<td id="res_line" width="20" >${}thread_id</td> 
+<td id="res_line"> ${}thread_title
+<td id="res_line"> ${}creator
+<td id="res_line">${}reply_nb</td>
+<td id="res_line">${}created_date</td>
+<td id="res_line">${}last_user 
+<td id="res_line">${}last_update
+</td><td id="res_line">${}th_favorite 
+</td></tr>
+
+<tr id="res_line"> 
+<td id="res_line" width="20" >${}thread_id</td> 
+<td id="res_line"> ${}thread_title
+<td id="res_line"> ${}creator
+<td id="res_line">${}reply_nb</td>
+<td id="res_line">${}created_date</td>
+<td id="res_line">${}last_user 
+<td id="res_line">${}last_update
+</td><td id="res_line">${}th_favorite 
+</td></tr>      
+
+<tr id="res_line"> 
+<td id="res_line" width="20" >${}thread_id</td> 
+<td id="res_line"> ${}thread_title
+<td id="res_line"> ${}creator
+<td id="res_line">${}reply_nb</td>
+<td id="res_line">${}created_date</td>
+<td id="res_line">${}last_user 
+<td id="res_line">${}last_update
+</td><td id="res_line">${}th_favorite 
+</td></tr>
+
+<tr id="res_line"> 
+<td id="res_line" width="20" >${}thread_id</td> 
+<td id="res_line"> ${}thread_title
+<td id="res_line"> ${}creator
+<td id="res_line">${}reply_nb</td>
+<td id="res_line">${}created_date</td>
+<td id="res_line">${}last_user 
+<td id="res_line">${}last_update
+</td><td id="res_line">${}th_favorite 
+</td></tr>
+
+<tr id="res_line"> 
+<td id="res_line" width="20" >${}thread_id</td> 
+<td id="res_line"> ${}thread_title
+<td id="res_line"> ${}creator
+<td id="res_line">${}reply_nb</td>
+<td id="res_line">${}created_date</td>
+<td id="res_line">${}last_user 
+<td id="res_line">${}last_update
+</td><td id="res_line">${}th_favorite 
+</td></tr>
+
+<tr id="res_line"> 
+<td id="res_line" width="20" >${}thread_id</td> 
+<td id="res_line"> ${}thread_title
+<td id="res_line"> ${}creator
+<td id="res_line">${}reply_nb</td>
+<td id="res_line">${}created_date</td>
+<td id="res_line">${}last_user 
+<td id="res_line">${}last_update
+</td><td id="res_line">${}th_favorite 
+</td></tr>
+</table>
+</td>
+</tr>
+</table> 
+<div class="center"> 
+<input type="submit" name="next" value="次のページ">
+<input type="submit" name="back" value="前のページ"> 
+</div>
+</body>
+</html>
