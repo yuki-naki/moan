@@ -71,5 +71,5 @@ public class Query {
 		rs.close();
 
 		return isAdmin;
-	}
+	}	
 }
