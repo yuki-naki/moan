@@ -56,7 +56,7 @@ CREATE TABLE test_comment(
  commenter VARCHAR2(20),
  content VARCHAR2(4000) NOT NULL,
  created_date DATE DEFAULT SYSDATE NOT NULL,
- CONSTRAINT comment_id_pk PRIMARY KEY(comment_id),
+ CONSTRAINT comment_id_pk PRIMARY KEY(comment_id, thread_id),
  CONSTRAINT comment_commenter_fk FOREIGN KEY(commenter) REFERENCES test_user(username),
  CONSTRAINT comment_thread_id_fk FOREIGN KEY(thread_id) REFERENCES test_thread(thread_id)
 );
