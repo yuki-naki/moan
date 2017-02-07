@@ -1,3 +1,14 @@
+DROP SEQUENCE test_comment_seq;
+DROP TABLE test_comment;
+DROP SEQUENCE test_thread_seq;
+DROP TABLE test_thread;
+DROP SEQUENCE test_user_seq;
+DROP TABLE test_admin;
+DROP TABLE test_user;
+
+
+
+
 CREATE TABLE test_user(
  user_id NUMBER(4),
  username VARCHAR2(20) UNIQUE NOT NULL,
@@ -28,11 +39,11 @@ CREATE TABLE test_thread(
  creator VARCHAR2(20) NOT NULL,
  created_date DATE DEFAULT SYSDATE NOT NULL,
  last_update DATE DEFAULT SYSDATE NOT NULL,
- last_username VARCHAR2(20) NOT NULL,
+ last_user VARCHAR2(20) NOT NULL,
  reply_nb NUMBER(4) DEFAULT 0 NOT NULL,
  CONSTRAINT thread_id_pk PRIMARY KEY(thread_id),
  CONSTRAINT thread_creator_fk FOREIGN KEY(creator) REFERENCES test_user(username),
- CONSTRAINT thread_last_username_fk FOREIGN KEY(last_username) REFERENCES test_user(username)
+ CONSTRAINT thread_last_user_fk FOREIGN KEY(last_user) REFERENCES test_user(username)
 );
 
 CREATE SEQUENCE test_thread_seq;
@@ -58,13 +69,3 @@ INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Maruyama', 'TestC
 UPDATE test_thread SET reply_nb = 1 WHERE thread_id = 1;
 
 commit;
-
---------------------------------------------------------------------------------------------------------
-
-DROP SEQUENCE test_comment_seq;
-DROP TABLE test_comment;
-DROP SEQUENCE test_thread_seq;
-DROP TABLE test_thread;
-DROP SEQUENCE test_user_seq;
-DROP TABLE test_admin;
-DROP TABLE test_user;
