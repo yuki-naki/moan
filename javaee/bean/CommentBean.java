@@ -1,55 +1,52 @@
-package bean;
-
 public class CommentBean {
 	
 	private String commentId;
 	private String threadId;
-	private String createdDate;
-	private String creator;
+	private String commenter;
 	private String content;
+	private String createdDate;
 	
-	
-	public CommentBean(String commentId, String threadId, 
-		String createdDate, String creator, String content) {
+	public CommentBean(String commentId, String threadId, String commenter, String content, String createdDate) {
 			this.commentId = commentId;
 			this.threadId = threadId;
-			this.createdId = createdId;
-			this.createdDate = createdDate;
+			this.commenter = commenter;
 			this.content = content;
+			this.createdDate = createdDate;
 		}
 	
 	public String getCommentId(){
 		return commentId;
 	}
-	public setCommentId(String commentId){
+	public void setCommentId(String commentId){
 		this.commentId = commentId;
 	}
 
 	public String getThreadId(){
 		return threadId;
 	}
-	public setThreadId(String threadId){
+	public void setThreadId(String threadId){
 		this.threadId = threadId;
 	}
 	
-	public String getCreatedDate(){
-		return createdId;
+	public String getContent(){
+		return content;
 	}
-	public setCreatedId(String createdId){
-		this.createdId = createdId;
+	public void setContent(String Content){
+		this.content = content;
 	}
 	
 	public String getCreatedDate(){
 		return createdDate;
 	}
-	public setCreatedDate(String createdDate){
-		this.createdDate = createdDate;
+	public void setCreatedDate(String createdId){
+		this.createdDate= createdDate;
 	}
 
-	public String getContent(){
-		return content;
+	public String getCommenter(){
+		return commenter;
 	}
-	public setContent(String Content){
-		this.content = content;
+	public void setCommenter(String commenter){
+		this.commenter = commenter;
 	}
+	
 }
