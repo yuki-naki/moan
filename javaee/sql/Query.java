@@ -72,4 +72,88 @@ public class Query {
 
 		return isAdmin;
 	}	
+	
+	
+	//Threadチェック
+	//Insertチェック
+	public static void insertThread(Connection conn, ThreadBean thread) throws SQLException{
+
+		PreparedStatement ps = conn.prepareStatement
+		("INSERT INTO test_thread VALUES (test_thread_seq.nextVal, ?, ?, SYSDATE, SYSDATE, ?, ?)");
+
+		ps.setString(1, thread.getTitle());
+		ps.setString(2, thread.getCreator());
+		ps.setString(3, thread.getLastUser());
+		ps.setInt(4, thread.getReplyNb());
+
+		ps.executeUpdate();
+	}
+	//deleteチェック
+	public static void deleteThread(Connection conn, String id) throws SQLException{
+
+		PreparedStatement ps = conn.prepareStatement
+		("DELETE FROM test_thread WHERE thread_id= ?");
+
+		ps.setString(1,id);
+
+		ps.executeUpdate();
+	}
+	//updateチェック
+	public static void updateThread(Connection conn, String id) throws SQLException{
+
+		PreparedStatement ps = conn.prepareStatement
+		("UPDATE test_thread SET last_user='Oikawa' WHERE thread_id= ?");
+		
+		ps.setString(1,id);
+
+		ps.executeUpdate();
+	}
+	
+	//CommentCheck
+	//insertチェック
+	public static void insertComment(Connection conn, CommentBean comment) throws SQLException{
+		
+		PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM test_comment WHERE thread_id = ?");
+		ps.setString(1, comment.getThreadId());
+		ResultSet rs = ps.executeQuery();
+		int commentNb = 0;
+
+		if(rs.next()){
+			commentNb = rs.getInt(1);
+		}
+
+		rs.close();
+
+		ps = conn.prepareStatement
+		("INSERT INTO test_comment VALUES (?, ?, ?, ?, SYSDATE)");
+		
+		ps.setInt(1,(commentNb+1) );
+		ps.setString(2, comment.getThreadId());
+		ps.setString(3, comment.getCommenter());
+		ps.setString(4, comment.getContent());
+
+		ps.executeUpdate();
+	}
+	
+	//deleteチェック
+	public static void deleteComment(Connection conn, String id) throws SQLException{
+
+		PreparedStatement ps = conn.prepareStatement
+		("DELETE FROM test_comment WHERE comment_id= ?");
+
+		ps.setString(1,id);
+
+		ps.executeUpdate();
+	}
+	
+	//updateチェック
+	public static void updateComment(Connection conn, String id) throws SQLException{
+
+		PreparedStatement ps = conn.prepareStatement
+		("UPDATE test_comment SET content='aiaiaa' WHERE comment_id= ?");
+		
+		ps.setString(1,id);
+
+		ps.executeUpdate();
+	}
 }
