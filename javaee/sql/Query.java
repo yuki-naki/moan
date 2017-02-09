@@ -71,7 +71,32 @@ public class Query {
 		rs.close();
 
 		return isAdmin;
-	}	
+	}
+
+	public static List<ThreadBean> getThreads(Connection conn) throws SQLException{
+
+		List<ThreadBean> listThread = new LinkedList<>();
+
+		Statement stmt = conn.prepareStatement("SELECT * FROM test_thread");
+		ResultSet rs = stmt.executeQuery();
+
+		while(rs.next()){
+			String threadId = rs.getString(1);
+			String title = rs.getString(2);
+			String creator = rs.getString(3);
+			String created_date = rs.getString(4);
+			String last_update = rs.getString(5);
+			String last_user = rs.getString(6);
+			int reply_nb = rs.getInt(7);
+
+			ThreadBean thread = new ThreadBean(threadId, title, creator, created_date, last_update, last_user, replay_nb);
+			listThread.add(thread);
+		}
+
+		rs.close();
+		stmt.close();
+		return listThread;
+	}
 	
 	
 	//Threadチェック
