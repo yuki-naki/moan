@@ -1,64 +1,60 @@
-﻿<!DOCTYPE html>
+﻿<!DOCTYPE HTML5>
 <html lang="ja">
+
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=Shift_JIS">
-<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
-<META HTTP-EQUIV="Content-Script-Type" CONTENT="text/javascript">
-<title>掲示板</title>
-<meta name="Robots" content="noindex">
-<meta name="robots" content="noindex,noarchive">
-<link rel="stylesheet" href="keijibanres.css">
-<link rel="index" href="http://bbs.sekkaku.net/bbs/A/">
-<link rel="alternate" media="handheld" href="http://bbs.sekkaku.net/bbs/i.pl?A">
-<link rel="next" href="http://bbs.sekkaku.net/bbs/A/&page=11">
+<link rel="stylesheet" type="text/css" href="keijibanres.css">
+  <!-- 参考https://bbs.sekkaku.net-->
+<title>掲示板 レス</title>
 </head>
-<body  bgcolor="#FAFAFA" text="#000000" link="#0000FF" alink="#FF0000" vlink="#FF0000" onLoad="writecookie();">
 
 
-<table align="center" cellpadding="5" cellspacing="0" summary="AD">
-  <tr>
-  </tr>
-  <tr>
-    <td colspan="2">
-	<div align=center>
-</div>
-
-	</td>
-  </tr>
-</table>
 <br>
 <br>
 <h3 align="center"><a href="">スレッドの新規作成はこちらから</a></h3>
 
 <p align="center"><font size="6" color ="#FF0088">スレッド名</font></p>
-<p align="center">何か記念に書いてください！<br>114118<br>今日9 昨日19</p>
+<p align="center">何か記念に書いてください！</p>
 <p align="center"><a href="">トップページへ戻る</a></p>
 <form method="POST" action="http://bbs.sekkaku.net/bbs/A/" name="f1" accept-charset="Shift_JIS">
 <input type="password" name="" style="visibility:hidden;width:5px; height:1px;">
-<table align="center" class="maintable">
-<tr> 
-<td valign="bottom" colspan="3"> 
+<table id="border" width="735" border="0" >
+<tr>
+<td>
+<table width="100%" border="0" >
+<tr id="resLine" > 
+<td id="resLine" width="100">名前</td>
+<th id="comment" >
+<input type="text" name="name" size="60">
+</th>
+</tr>
+
+<tr id="resLine" > 
+<td id="resLine" width="100">タイトル</td>
+<td id="comment" >
+<input type="text" name="sub" size="60">
 </td>
 </tr>
-<tr>
-<td nowrap>名前</td>
-<td><input type="text" name="name" size="50" class="maintable"></td>
-</tr>
-<tr>
-<td nowrap>題名</td>
-<td><input type="text" name="sub" size="50" class="maintable"></td>
-</tr>
-<tr>
-<td nowrap>内容</td>
-<td><textarea cols="60" rows=4 name="mes" class="maintable"></textarea> 
+
+<tr id="resLine"> 
+<td id="resLine" width="100">本文</td> 
+
+<td id="comment">
+<textarea cols="60" rows=4 name="mes" class="maintable"></textarea> 
 <INPUT TYPE=submit VALUE="書き込む" onClick="mmsg();">
 </td>
 </tr>
-<tr>
-<td nowrap>URL</td>
-<td><input type="text" size="50" name="url" class="maintable"></td>
+
+<tr id="resLine"> 
+<td id="resLine" width="100">URL</td>
+
+<td id="comment">
+<input type="text" size="50" name="url" class="maintable"></td>
 </tr>
 </table>
+</td>
+</tr>
+</table>
+<br><br>  
 <hr>
 <input type="hidden" name="mode" value="msg">
 <input type="hidden" name="pot" value="2097309417502">
