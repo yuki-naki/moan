@@ -50,7 +50,10 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><input class="loginFormSubmit" type="submit" value="Register" name="register"/></td>
+						<td>
+							<input type="hidden" name="servlet" value="${servlet}" />
+							<input class="loginFormSubmit" type="submit" value="Register" name="register"/>
+						</td>
 					</tr>
 				</table>
 			</fieldset>

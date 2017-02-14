@@ -2,26 +2,9 @@ package bean;
 
 public class UserBean {
 
-	private String userId;
-	private String name;
-	private String password;
-	private boolean admin;
-
-	public UserBean(){ }
-
-	public UserBean(String userId, String name, String password){
-		this.userId = userId;
-		this.name = name;
-		this.password = password;
-	}
-
-	public String getId() {
-		return userId;
-	}
-
-	public void setId(String userId) {
-		this.userId = userId;
-	}
+	protected String name;
+	protected String password;
+	protected boolean isAdmin;
 
 	public String getName() {
 		return name;
@@ -39,11 +22,11 @@ public class UserBean {
 		this.password = password;
 	}
 
-	public boolean isAdmin() {
-		return admin;
+	public boolean getIsAdmin() {
+		return isAdmin;
 	}
 
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
+	public void setIsAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 }
