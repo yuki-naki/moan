@@ -6,7 +6,8 @@ public class CommentBean {
 	private String content;
 	private String createdDate;
 	
-	public CommentBean(String commentId, String threadId, String commenter, String content, String createdDate) {
+	public CommentBean(String commentId, String threadId, 
+		String commenter, String content, String createdDate) {
 			this.commentId = commentId;
 			this.threadId = threadId;
 			this.commenter = commenter;
