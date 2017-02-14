@@ -5,30 +5,36 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
 
-import bean.UserBean;
+import bean.AdminBean;
+import bean.ClientBean;
+import bean.CommentBean;
+import bean.ThreadBean;
+import servlet.ThreadServlet;
 
 public class Query {
 
-	public static boolean hasUser(Connection conn, String name) throws SQLException{
+	public static boolean hasClient(Connection conn, String name) throws SQLException{
 
-		boolean hasUser = false;
+		boolean hasClient = false;
 
 		PreparedStatement ps = conn.prepareStatement("SELECT * FROM test_user WHERE username = ?");
 		ps.setString(1, name);
 		ResultSet rs = ps.executeQuery();
 
 		if(rs.next()){
-			hasUser = true;
+			hasClient = true;
 		}
 
 		rs.close();
-		return hasUser;
+		return hasClient;
 	}
 
-	public static UserBean getUser(Connection conn, String name, String pass) throws SQLException{
+	public static ClientBean getClient(Connection conn, String name, String pass) throws SQLException{
 
-		UserBean user = null;
+		ClientBean client = null;
 
 		PreparedStatement ps = conn.prepareStatement("SELECT * FROM test_user WHERE username = ? AND password = ?");
 		ps.setString(1, name);
@@ -39,14 +45,14 @@ public class Query {
 			String userId = rs.getString(1);
 			String username = rs.getString(2);
 			String password = rs.getString(3);
-			user = new UserBean(userId, username, password);
+			client = new ClientBean(userId, username, password);
 		}
 
 		rs.close();
-		return user;
+		return client;
 	}
 
-	public static void insertUser(Connection conn, UserBean user) throws SQLException{
+	public static void insertClient(Connection conn, ClientBean user) throws SQLException{
 
 		PreparedStatement ps = conn.prepareStatement("INSERT INTO test_user VALUES (test_user_seq.nextVal, ?, ?)");
 
@@ -56,11 +62,11 @@ public class Query {
 		ps.executeUpdate();
 	}
 
-	public static boolean isUserAdmin(Connection conn, String name) throws SQLException{
+	public static boolean isAdmin(Connection conn, String name) throws SQLException{
 
 		boolean isAdmin = false;
 
-		PreparedStatement ps = conn.prepareStatement("SELECT * FROM test_admin WHERE adminName = ?");
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM test_admin WHERE admin_name = ?");
 		ps.setString(1, name);
 		ResultSet rs = ps.executeQuery();
 
@@ -73,12 +79,32 @@ public class Query {
 		return isAdmin;
 	}
 
-	public static List<ThreadBean> getThreads(Connection conn) throws SQLException{
+	public static AdminBean getAdmin(Connection conn, String name, String pass) throws SQLException{
+
+		AdminBean admin = null;
+
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM test_admin WHERE admin_name = ? AND admin_pass = ?");
+		ps.setString(1, name);
+		ps.setString(2, pass);
+		ResultSet rs = ps.executeQuery();
+
+		if(rs.next()){
+			String adminName = rs.getString(1);
+			String adminPass = rs.getString(2);
+			admin = new AdminBean(adminName, adminPass);
+		}
+
+		rs.close();
+		return admin;
+	}
+
+	public static List<ThreadBean> getThreads(Connection conn, int page) throws SQLException{
 
 		List<ThreadBean> listThread = new LinkedList<>();
 
-		Statement stmt = conn.prepareStatement("SELECT * FROM test_thread");
-		ResultSet rs = stmt.executeQuery();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM test_thread WHERE thread_id BETWEEN "+((page - 1) * ThreadServlet.THREADS_NB + 1)
+				+" AND "+(page * ThreadServlet.THREADS_NB));
 
 		while(rs.next()){
 			String threadId = rs.getString(1);
@@ -89,7 +115,7 @@ public class Query {
 			String last_user = rs.getString(6);
 			int reply_nb = rs.getInt(7);
 
-			ThreadBean thread = new ThreadBean(threadId, title, creator, created_date, last_update, last_user, replay_nb);
+			ThreadBean thread = new ThreadBean(threadId, title, creator, created_date, last_update, last_user, reply_nb);
 			listThread.add(thread);
 		}
 
@@ -97,23 +123,53 @@ public class Query {
 		stmt.close();
 		return listThread;
 	}
-	
-	
-	//Threadチェック
-	//Insertチェック
-	public static void insertThread(Connection conn, ThreadBean thread) throws SQLException{
+
+	public static List<CommentBean> getComments(Connection conn, String threadId) throws SQLException{
+
+		List<CommentBean> listComment = new LinkedList<>();
+
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM test_comment WHERE thread_id = "+threadId+" ORDER BY created_date");
+
+		while(rs.next()){
+			String commentId = rs.getString(1);
+			String commenter = rs.getString(3);
+			String content = rs.getString(4);
+			String created_date = rs.getString(5);
+
+			CommentBean comment = new CommentBean(commentId, threadId, commenter, content, created_date);
+			listComment.add(comment);
+		}
+
+		rs.close();
+		stmt.close();
+		return listComment;
+	}
+
+	public static int insertThread(Connection conn, String username, String title) throws SQLException{
 
 		PreparedStatement ps = conn.prepareStatement
 		("INSERT INTO test_thread VALUES (test_thread_seq.nextVal, ?, ?, SYSDATE, SYSDATE, ?, ?)");
 
-		ps.setString(1, thread.getTitle());
-		ps.setString(2, thread.getCreator());
-		ps.setString(3, thread.getLastUser());
-		ps.setInt(4, thread.getReplyNb());
+		ps.setString(1, title);
+		ps.setString(2, username);
+		ps.setString(3, username);
+		ps.setInt(4, 0);
 
 		ps.executeUpdate();
+
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT test_thread_seq.currVal FROM dual");
+
+		rs.next();
+
+		int threadId = rs.getInt(1);
+
+		rs.close();
+		stmt.close();
+		return threadId;
 	}
-	//deleteチェック
+
 	public static void deleteThread(Connection conn, String id) throws SQLException{
 
 		PreparedStatement ps = conn.prepareStatement
@@ -123,23 +179,31 @@ public class Query {
 
 		ps.executeUpdate();
 	}
-	//updateチェック
-	public static void updateThread(Connection conn, String id) throws SQLException{
 
-		PreparedStatement ps = conn.prepareStatement
-		("UPDATE test_thread SET last_user='Oikawa' WHERE thread_id= ?");
-		
-		ps.setString(1,id);
+	public static void updateThread(Connection conn, int threadId, String username) throws SQLException{
+
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT reply_nb FROM test_thread WHERE thread_id = "+ threadId);
+
+		rs.next();
+
+		int replyNb = rs.getInt(1);
+
+		rs.close();
+		stmt.close();
+
+		PreparedStatement ps = conn.prepareStatement("UPDATE test_thread SET last_update = SYSDATE, last_user='"+username+"', "
+				+ "reply_nb = "+(replyNb + 1)+" WHERE thread_id= ?");
+
+		ps.setInt(1, threadId);
 
 		ps.executeUpdate();
 	}
-	
-	//CommentCheck
-	//insertチェック
-	public static void insertComment(Connection conn, CommentBean comment) throws SQLException{
-		
+
+	public static void insertComment(Connection conn,int threadId, String username, String content) throws SQLException{
+
 		PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM test_comment WHERE thread_id = ?");
-		ps.setString(1, comment.getThreadId());
+		ps.setInt(1, threadId);
 		ResultSet rs = ps.executeQuery();
 		int commentNb = 0;
 
@@ -151,16 +215,16 @@ public class Query {
 
 		ps = conn.prepareStatement
 		("INSERT INTO test_comment VALUES (?, ?, ?, ?, SYSDATE)");
-		
+
 		ps.setInt(1,(commentNb+1) );
-		ps.setString(2, comment.getThreadId());
-		ps.setString(3, comment.getCommenter());
-		ps.setString(4, comment.getContent());
+		ps.setInt(2, threadId);
+		ps.setString(3, username);
+		ps.setString(4, content);
 
 		ps.executeUpdate();
 	}
-	
-	//deleteチェック
+
+	//delete繝√ぉ繝�繧ｯ
 	public static void deleteComment(Connection conn, String id) throws SQLException{
 
 		PreparedStatement ps = conn.prepareStatement
@@ -170,13 +234,13 @@ public class Query {
 
 		ps.executeUpdate();
 	}
-	
-	//updateチェック
+
+	//update繝√ぉ繝�繧ｯ
 	public static void updateComment(Connection conn, String id) throws SQLException{
 
 		PreparedStatement ps = conn.prepareStatement
 		("UPDATE test_comment SET content='aiaiaa' WHERE comment_id= ?");
-		
+
 		ps.setString(1,id);
 
 		ps.executeUpdate();
