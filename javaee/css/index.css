@@ -46,6 +46,7 @@ h1 {
 	background-image: url("searchMouseOver.png");
 }
 #threadTable {
+	width:730;
 	margin-top: 20px;
 	position: relative;
 	width: 100%;
@@ -92,8 +93,50 @@ background-color:#FFFFFF;
 text-align:left;
 font-size:12;
 }
-
-#res_titly{
+#title_check{
+width:100;
+text-align:center;
+font-color:#003399;
+font-size:14;
+}
+#title_title{
+width:350;
+text-align:center;
+font-color:#003399;
+font-size:14;
+}
+#title_creator{
+width:80;
+text-align:center;
+font-color:#003399;
+font-size:14;
+}
+#title_res{
+width:70;
+text-align:center;
+font-color:#003399;
+font-size:14;
+}
+#title_creator_date{
+width:150;
+text-align:center;
+font-color:#003399;
+font-size:14;
+}
+#title_last_creator{
+width:80;
+text-align:center;
+font-color:#003399;
+font-size:14;
+}
+#title_last_update{
+width:60;
+text-align:center;
+font-color:#003399;
+font-size:14;
+}
+#title_favorite{
+width:60;
 text-align:center;
 font-color:#003399;
 font-size:14;
@@ -102,6 +145,7 @@ font-size:14;
 background-color:#FFFFFF;
 text-align:center;
 font-size:14;
+width:20;
 }
 .center{
 text-align:center;
@@ -109,4 +153,5 @@ text-align:center;
 #newThreadBtnError {
 	color: red;
 	display: none;
+	width:578; 
 }
