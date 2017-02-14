@@ -1,0 +1,112 @@
+@CHARSET "UTF-8";
+html, body, div, form, button, input {
+	margin: 0;
+	padding: 0;
+}
+/*form {
+	display: inline-block;
+}*/
+tr, td, th {
+	border: 1px solid grey;
+}
+tr {
+	height: 25px;
+}
+h1 {
+	margin: 20px;
+}
+#main {
+	width: 75%;
+	margin: auto;
+}/*
+#title {
+	text-align: center;
+	position: relative;
+}*/
+#searchForm {
+	position: relative;
+	left: 40%;
+	width: 25%;
+}
+#searchInput {
+	width: 75%;
+	height: 22px;
+}
+#searchInput:FOCUS {
+	background: white none repeat scroll 0 0;
+}
+#searchBtn {
+	background-image: url("search.png");
+	cursor: pointer;
+	width: 22px;
+	height: 22px;
+	border: 1px solid grey;
+}
+#searchBtn:hover {
+	background-image: url("searchMouseOver.png");
+}
+#threadTable {
+	margin-top: 20px;
+	position: relative;
+	width: 100%;
+	border: 1px double grey;
+}
+.threadTd {
+	text-align: center;
+}
+#titleTd {
+	width: 40%;
+}
+#dateTd {
+	width: 20%;
+}
+.newThreadForm {
+	margin-top: 10px;
+}
+#title{
+text-align:center;
+font-size:50;
+color :#FF0088
+}
+/*
+#subtitle{
+font-size:15;
+text-align:center;
+}
+*/
+#threadTable{
+	margin:auto;
+background-color:#003399;
+}
+#newThreadTable{
+margin:auto;
+background-color:#003399;
+display:none;
+}
+#threadLine{
+text-align:right;
+background-color:#FFFFFF;
+}
+
+#comment{
+text-align:left;
+font-size:12;
+}
+
+#res_titly{
+text-align:center;
+font-color:#003399;
+font-size:14;
+}
+#res_line{
+background-color:#FFFFFF;
+text-align:center;
+font-size:14;
+}
+.center{
+text-align:center;
+}
+#newThreadBtnError {
+	color: red;
+	display: none;
+}

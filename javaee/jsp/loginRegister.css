@@ -1,0 +1,82 @@
+@CHARSET "UTF-8";
+#black_background{
+	position:fixed;
+	top:0px;
+	left:0px;
+	background:rgba(0,0,0,0.8);
+	height:100%;
+	width:100%;
+	cursor:pointer;
+	z-index:1;
+}
+#registerDiv {
+	position: absolute;
+	left: 40%;
+	top: 100px;
+	z-index: 2;
+	border-radius: 2%;
+	margin-left: -22px;
+	background-color: #ececec;
+	padding: 10px;
+}
+#loginDiv {
+	position: absolute;
+	left: 40%;
+	top: 100px;
+	z-index: 2;
+	border-radius: 2%;
+	margin-left: -22px;
+	background-color: #ececec;
+	padding: 10px;
+}
+.visible {
+    display: block;
+}
+.invisible {
+    display: none;
+}
+.close {
+	position: absolute;
+	margin-top: -10px;
+	margin-left: 325px;
+	cursor: pointer;
+	font-size: 22px;
+}
+.close:hover {
+	color: red;
+}
+fieldset {
+	border: 1px #0568CD solid;
+	border-radius: 2%;
+	background-color: #ececec;
+	padding-right: 5px;
+	padding-botom: 10px;
+}
+legend {
+	font-weight: bold;
+	color: #0568CD;
+}
+.loginForm {
+	width: 330px;
+}
+.loginForm table {
+	height: 150px;
+}
+.loginForm td {
+	border: none;
+	height: 25px;
+}
+.error {
+	color: red;
+}
+.loginFormInput {
+	maxlength: 20;
+	border: 1px #999 solid;
+	width: 170px;
+	height: 18px;
+}
+.loginFormSubmit {
+	height: 25px;
+	width: 70px;
+	margin-top: 20px;
+}
