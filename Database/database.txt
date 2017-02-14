@@ -7,8 +7,6 @@ DROP TABLE test_admin;
 DROP TABLE test_user;
 
 
-
-
 CREATE TABLE test_user(
  user_id NUMBER(4),
  username VARCHAR2(20) UNIQUE NOT NULL,
@@ -25,13 +23,13 @@ INSERT INTO test_user VALUES (test_user_seq.nextVal, 'Oikawa', 'Oikawa');
 
 CREATE TABLE test_admin(
  admin_name VARCHAR2(20) UNIQUE NOT NULL,
- CONSTRAINT admin_name_fk FOREIGN KEY(admin_name) REFERENCES test_user(username)
+ admin_pass VARCHAR2(20) NOT NULL
 );
 
-INSERT INTO test_admin VALUES ('Alex');
-INSERT INTO test_admin VALUES ('Maruyama');
-INSERT INTO test_admin VALUES ('Nakai');
-INSERT INTO test_admin VALUES ('Oikawa');
+INSERT INTO test_admin VALUES ('Alex', 'Alex');
+INSERT INTO test_admin VALUES ('Maruyama', 'Maruyama');
+INSERT INTO test_admin VALUES ('Nakai', 'Nakai');
+INSERT INTO test_admin VALUES ('Oikawa', 'Oikawa');
 
 CREATE TABLE test_thread(
  thread_id NUMBER(4),
@@ -41,9 +39,7 @@ CREATE TABLE test_thread(
  last_update DATE DEFAULT SYSDATE NOT NULL,
  last_user VARCHAR2(20) NOT NULL,
  reply_nb NUMBER(4) DEFAULT 0 NOT NULL,
- CONSTRAINT thread_id_pk PRIMARY KEY(thread_id),
- CONSTRAINT thread_creator_fk FOREIGN KEY(creator) REFERENCES test_user(username),
- CONSTRAINT thread_last_user_fk FOREIGN KEY(last_user) REFERENCES test_user(username)
+ CONSTRAINT thread_id_pk PRIMARY KEY(thread_id)
 );
 
 CREATE SEQUENCE test_thread_seq;
@@ -57,7 +53,6 @@ CREATE TABLE test_comment(
  content VARCHAR2(4000) NOT NULL,
  created_date DATE DEFAULT SYSDATE NOT NULL,
  CONSTRAINT comment_id_pk PRIMARY KEY(comment_id, thread_id),
- CONSTRAINT comment_commenter_fk FOREIGN KEY(commenter) REFERENCES test_user(username),
  CONSTRAINT comment_thread_id_fk FOREIGN KEY(thread_id) REFERENCES test_thread(thread_id) ON DELETE CASCADE
 );
 
