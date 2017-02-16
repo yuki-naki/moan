@@ -9,7 +9,9 @@ public class ThreadBean {
 	private int replyNb;
 
 
-	public ThreadBean(String threadId, String title, String creator, String createdDate, String lastUpdate, String lastUser, int replyNb){
+	public ThreadBean(String threadId, String title, String creator,
+		String createdDate, String lastUpdate, String lastUser, int replyNb){
+			
 		this.threadId = threadId;
 		this.title = title;
 		this.creator = creator;

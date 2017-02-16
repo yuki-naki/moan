@@ -13,27 +13,22 @@
 	<c:import url="/loginRegister.jsp" />
 
 <p id="title" >掲示板</p>
-<!--
 
-<!--仮-->
-<table id="threadTable" width="730" border="1" >
-
-<td>
-<table width="100%" border="0" >
+<table id="threadTable"  border="0" >
 <tr id="threadLine">
-<th id="res_titly" nowrap width="100">スレッドID</td>
-<th id="res_titly" nowrap width="350">スレッドタイトル</td>
-<th id="res_titly" nowrap width="80">スレッド作成者名</th>
-<th id="res_titly" nowrap width="70">スレッド返信数</th>
-<th id="res_titly" nowrap width="150">作成日</th>
-<th id="res_titly" nowrap width="80">最終作成者</th>
-<th id="res_titly" nowrap width="60">最終更新日</th>
-<th id="res_titly" nowrap width="60" >favorite</th>
+<th id="title_check">check</td>
+<th id="title_title">スレッドタイトル</td>
+<th id="title_creator">スレッド作成者名</th>
+<th id="title_res">スレッド返信数</th>
+<th id="title_creator_date">作成日</th>
+<th id="title_last_creator">最終作成者</th>
+<th id="title_last_update">最終更新日</th>
+<th id="title_favorite">favorite</th>
 </tr>
 
 <c:forEach var="thread" items="${threads}" begin="0" end="${threadsNb - 1}">
 	<tr id="res_line">
-		<td id="res_line" width="20"><c:out value="${thread.threadId}" /></td>
+		<td id="res_line"><c:out value="${thread.threadId}" /></td>
 		<td id="res_line"><a href="${pageContext.request.contextPath}/comments?threadId=${thread.threadId}&title=${thread.title}"><c:out value="${thread.title}" /></a></td>
 		<td id="res_line"><c:out value="${thread.creator}" /></td>
 		<td id="res_line"><c:out value="${thread.replyNb}" /></td>
@@ -45,12 +40,9 @@
 </c:forEach>
 
 </table>
-</td>
-</tr>
-</table>
 <div>
 	<button id="newThreadBtn" class="${empty sessionScope.userSession.name ? 'disabled' : ''}">New Thread</button>
-	<span id="newThreadBtnError">You have to be connected to create a new thread.</span>
+	<span id="newThreadBtnError">新しいスレッドを作成するために接続する必要があります</span>
 	<c:if test="${sessionScope.userSession.isAdmin}">
 		<button id="deleteThreadBtn">Delete Thread</button>
 	</c:if>
@@ -68,7 +60,7 @@ Page <c:out value="${page}" />
 </form>
 
 <form action="threads" method="post">
-<table id="newThreadTable" width="578" border="0" >
+<table id="newThreadTable"border="0" >
 
 <tr id="threadLine">
 <td>名前</td>

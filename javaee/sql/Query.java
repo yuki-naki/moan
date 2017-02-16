@@ -180,26 +180,6 @@ public class Query {
 		ps.executeUpdate();
 	}
 
-	public static void updateThread(Connection conn, int threadId, String username) throws SQLException{
-
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT reply_nb FROM test_thread WHERE thread_id = "+ threadId);
-
-		rs.next();
-
-		int replyNb = rs.getInt(1);
-
-		rs.close();
-		stmt.close();
-
-		PreparedStatement ps = conn.prepareStatement("UPDATE test_thread SET last_update = SYSDATE, last_user='"+username+"', "
-				+ "reply_nb = "+(replyNb + 1)+" WHERE thread_id= ?");
-
-		ps.setInt(1, threadId);
-
-		ps.executeUpdate();
-	}
-
 	public static void insertComment(Connection conn,int threadId, String username, String content) throws SQLException{
 
 		PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM test_comment WHERE thread_id = ?");
@@ -225,10 +205,15 @@ public class Query {
 	}
 
 	//deleteチェック
-	public static void deleteComment(Connection conn, String id) throws SQLException{
+	public static void deleteComment(Connection conn, String id、boolean admin) throws SQLException{
 
 		PreparedStatement ps = conn.prepareStatement
-		("DELETE FROM test_comment WHERE comment_id= ?");
+		//("DELETE FROM test_comment WHERE comment_id= ?");
+		if(admin){
+			("UPDATE test_comment SET content='このコメントは管理者権限により削除されました。'WHERE comment_id= ?");
+		}else{
+			("UPDATE test_comment SET content='このコメントは削除されました。'WHERE comment_id= ?");
+		}
 
 		ps.setString(1,id);
 
