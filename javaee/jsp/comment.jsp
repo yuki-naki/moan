@@ -53,7 +53,17 @@
 		<div class="spancolor buttonposition">
 		
 		<INPUT id="newCommentBtn" class="${empty sessionScope.userSession ? 'disabled' : ''}" TYPE="submit" VALUE="書き込む" name="newComment">
+		
 		<span  id="newCommentBtnError">新しいスレッドを作成するには接続する必要があります。</span>
-		</div>	
+		</div>
+		
+		<br>
+		
+		<div class="center buttonpad">
+		
+		<input type="submit" value="トップページへ">
+		
+		</div>
+
 </body>
 </html>
