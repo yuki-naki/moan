@@ -45,7 +45,7 @@ CREATE SEQUENCE test_thread_seq;
 
 INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'この学校素晴らしいなぁ', 'Maruyama', SYSDATE +1/24, SYSDATE +2/24, 'Maruyama', 0);
 INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'MoanBBS', 'Oikawa', SYSDATE +3/24, SYSDATE +5/24, 'Oikawa', 0);
-INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'Moan', 'Alex', SYSDATE +6/24, SYSDATE, +9/24'Alex', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'Moan', 'Alex', SYSDATE -3/24, SYSDATE, 'Alex', 0);
 INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '学校生活', 'Nakai', SYSDATE +10/24, SYSDATE +11/24, 'Nakai', 0);
 
 
@@ -66,17 +66,17 @@ INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Maruyama', 'ク�
 INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Oikawa', '友達いっぱい', SYSDATE +2/24, 0); 
 
 
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 2, 'Oikawa', '制作お疲れ様', SYSDATE +3/24 , 0);
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 2, 'Maruyama', '今夜はゆっくり寝よう', SYSDATE +4/24, 0);
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 2, 'Alex', 'おつかれ', SYSDATE +5/24, 0);
+INSERT INTO test_comment VALUES (1, 2, 'Oikawa', '制作お疲れ様', SYSDATE +3/24 , 0);
+INSERT INTO test_comment VALUES (2, 2, 'Maruyama', '今夜はゆっくり寝よう', SYSDATE +4/24, 0);
+INSERT INTO test_comment VALUES (3, 2, 'Alex', 'おつかれ', SYSDATE +5/24, 0);
 
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 3, 'Alex', 'チームプレイ役割分担大事', SYSDATE +6/24 , 0);
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 3, 'nakai', '話あってよりいい結果を得られる', SYSDATE +7/24, 0);
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 3, 'Oikawa', 'また一緒にやろう', SYSDATE +8/24 , 0);
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 3, 'Maruyama', 'よろしく', SYSDATE +9/24 , 0);
+INSERT INTO test_comment VALUES (1, 3, 'Alex', 'チームプレイ役割分担大事', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (2, 3, 'Nakai', '話あってよりいい結果を得られる', SYSDATE -2/24, 0);
+INSERT INTO test_comment VALUES (3, 3, 'Oikawa', 'また一緒にやろう', SYSDATE -1/24 , 0);
+INSERT INTO test_comment VALUES (4, 3, 'Maruyama', 'よろしく', SYSDATE, 0);
 
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 4, 'Nakai', '色んな体験できる', SYSDATE +10/24 , 0);
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 4, 'Alex', '就職も頑張ろう', SYSDATE +11/24, 0);
+INSERT INTO test_comment VALUES (1, 4, 'Nakai', '色んな体験できる', SYSDATE +10/24 , 0);
+INSERT INTO test_comment VALUES (2, 4, 'Alex', '就職も頑張ろう', SYSDATE +11/24, 0);
 
 UPDATE test_thread SET reply_nb = 1 WHERE thread_id = 1;
 UPDATE test_thread SET reply_nb = 2 WHERE thread_id = 2;
