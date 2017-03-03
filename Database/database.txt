@@ -1,4 +1,4 @@
-DROP SEQUENCE test_comment_seq;
+﻿DROP SEQUENCE test_comment_seq;
 DROP TABLE test_comment;
 DROP SEQUENCE test_thread_seq;
 DROP TABLE test_thread;
@@ -43,7 +43,11 @@ CREATE TABLE test_thread(
 
 CREATE SEQUENCE test_thread_seq;
 
-INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'TestThread', 'Alex', SYSDATE - 1, SYSDATE, 'Alex', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'この学校素晴らしいなぁ', 'Maruyama', SYSDATE +1/24, SYSDATE +2/24, 'Maruyama', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'MoanBBS', 'Oikawa', SYSDATE +3/24, SYSDATE +5/24, 'Oikawa', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'Moan', 'Alex', SYSDATE +6/24, SYSDATE, +9/24'Alex', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '学校生活', 'Nakai', SYSDATE +10/24, SYSDATE +11/24, 'Nakai', 0);
+
 
 CREATE TABLE test_comment(
  comment_id NUMBER(4),
@@ -58,9 +62,25 @@ CREATE TABLE test_comment(
 
 CREATE SEQUENCE test_comment_seq;
 
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Alex', 'TestComment', SYSDATE - 1, 0);
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Maruyama', 'TestComment2', SYSDATE, 0);
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Maruyama', 'クラスメート最高', SYSDATE +1/24 , 0);
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Oikawa', '友達いっぱい', SYSDATE +2/24, 0); 
+
+
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 2, 'Oikawa', '制作お疲れ様', SYSDATE +3/24 , 0);
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 2, 'Maruyama', '今夜はゆっくり寝よう', SYSDATE +4/24, 0);
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 2, 'Alex', 'おつかれ', SYSDATE +5/24, 0);
+
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 3, 'Alex', 'チームプレイ役割分担大事', SYSDATE +6/24 , 0);
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 3, 'nakai', '話あってよりいい結果を得られる', SYSDATE +7/24, 0);
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 3, 'Oikawa', 'また一緒にやろう', SYSDATE +8/24 , 0);
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 3, 'Maruyama', 'よろしく', SYSDATE +9/24 , 0);
+
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 4, 'Nakai', '色んな体験できる', SYSDATE +10/24 , 0);
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 4, 'Alex', '就職も頑張ろう', SYSDATE +11/24, 0);
 
 UPDATE test_thread SET reply_nb = 1 WHERE thread_id = 1;
+UPDATE test_thread SET reply_nb = 2 WHERE thread_id = 2;
+UPDATE test_thread SET reply_nb = 3 WHERE thread_id = 3;
+UPDATE test_thread SET reply_nb = 1 WHERE thread_id = 4;
 
 commit;
