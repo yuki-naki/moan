@@ -28,7 +28,6 @@ CREATE TABLE test_admin(
 
 INSERT INTO test_admin VALUES ('Alex', 'Alex');
 INSERT INTO test_admin VALUES ('Maruyama', 'Maruyama');
-INSERT INTO test_admin VALUES ('Nakai', 'Nakai');
 INSERT INTO test_admin VALUES ('Oikawa', 'Oikawa');
 
 CREATE TABLE test_thread(
@@ -44,7 +43,7 @@ CREATE TABLE test_thread(
 
 CREATE SEQUENCE test_thread_seq;
 
-INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'TestThread', 'Alex', SYSDATE, SYSDATE, 'Alex', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'TestThread', 'Alex', SYSDATE - 1, SYSDATE, 'Alex', 0);
 
 CREATE TABLE test_comment(
  comment_id NUMBER(4),
@@ -52,14 +51,15 @@ CREATE TABLE test_comment(
  commenter VARCHAR2(20),
  content VARCHAR2(4000) NOT NULL,
  created_date DATE DEFAULT SYSDATE NOT NULL,
+ isDeleted NUMBER(1) DEFAULT 0 CONSTRAINT check_is_deleted CHECK (isDeleted IN (0,1)),
  CONSTRAINT comment_id_pk PRIMARY KEY(comment_id, thread_id),
  CONSTRAINT comment_thread_id_fk FOREIGN KEY(thread_id) REFERENCES test_thread(thread_id) ON DELETE CASCADE
 );
 
 CREATE SEQUENCE test_comment_seq;
 
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Alex', 'TestComment', SYSDATE);
-INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Maruyama', 'TestComment2', SYSDATE);
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Alex', 'TestComment', SYSDATE - 1, 0);
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Maruyama', 'TestComment2', SYSDATE, 0);
 
 UPDATE test_thread SET reply_nb = 1 WHERE thread_id = 1;
 
