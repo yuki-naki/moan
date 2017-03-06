@@ -47,6 +47,25 @@ INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'この学校素晴ら�
 INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'MoanBBS', 'Oikawa', SYSDATE -1/24, SYSDATE -4/24, 'Oikawa', 0);
 INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'Moan', 'Alex', SYSDATE -3/24, SYSDATE, 'Alex', 0);
 INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '学校生活', 'Nakai', SYSDATE -4/24, SYSDATE -3/24, 'Nakai', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'しりとりしよう', 'Nakai', SYSDATE -5/24, SYSDATE -3/24, 'Nakai', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '地震速報', 'Alex', SYSDATE -6/24, SYSDATE -5/24, 'Alex', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'ニュース', 'Oikawa', SYSDATE -7/24, SYSDATE -6/24, 'Oikawa', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '犬派猫派', 'Maruyama', SYSDATE -8/24, SYSDATE -7/24, 'Maruyama', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '科学解説', 'Nakai', SYSDATE -9/24, SYSDATE -8/24, 'Nakai', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '国際情報', 'Alex', SYSDATE -10/24, SYSDATE -9/24, 'Nakai', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '夢', 'Oikawa', SYSDATE -11/24, SYSDATE -10/24, 'Oikawa', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '環境について', 'Maruyama', SYSDATE -12/24, SYSDATE -11/24, 'Maruyama', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '生涯学習', 'Nakai', SYSDATE -13/24, SYSDATE -12/24, 'Nakai', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '熱い', 'Alex', SYSDATE -14/24, SYSDATE -13/24, 'Alex', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '春と秋が好き', 'Oikawa', SYSDATE -15/24, SYSDATE -14/24, 'Oikawa', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '方言', 'Maruyama', SYSDATE -16/24, SYSDATE -15/24, 'Maruyama', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '哲学', 'Nakai', SYSDATE -17/24, SYSDATE -16/24, 'Nakai', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'うどん', 'Alex', SYSDATE -18/24, SYSDATE -17/24, 'Alex', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'かき揚げ', 'Oikawa', SYSDATE -19/24, SYSDATE -18/24, 'Oikawa', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'お菓子食べたい', 'Maruyama', SYSDATE -20/24, SYSDATE -19/24, 'Maruyama', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '夢に向かって', 'Nakai', SYSDATE -21/24, SYSDATE -20/24, 'Nakai', 0);
+
+
 
 
 CREATE TABLE test_comment(
@@ -76,11 +95,63 @@ INSERT INTO test_comment VALUES (3, 3, 'Oikawa', 'また一緒にやろう', SYS
 INSERT INTO test_comment VALUES (4, 3, 'Maruyama', 'よろしく', SYSDATE, 0);
 
 INSERT INTO test_comment VALUES (1, 4, 'Nakai', '色んな体験できる', SYSDATE -4/24 , 0);
-INSERT INTO test_comment VALUES (2, 4, 'Alex', '就職も頑張ろう', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (2, 4, 'Alex', '就職も頑張ろう', SYSDATE -3/24, 0); 
+
+INSERT INTO test_comment VALUES (1, 5, 'Nakai', 'チームプレイ役割分担大事', SYSDATE -5/24, 0);
+INSERT INTO test_comment VALUES (2, 5, 'Alex', '話あってよりいい結果を得られる', SYSDATE -4/24, 0);
+INSERT INTO test_comment VALUES (3, 5, 'Oikawa', 'また一緒にやろう', SYSDATE -4/24 , 0);
+INSERT INTO test_comment VALUES (4, 5, 'Maruyama', 'よろしく', SYSDATE -4/24, 0); 
+INSERT INTO test_comment VALUES (5, 5, 'Alex', 'チームプレイ役割分担大事', SYSDATE -4/24, 0);
+INSERT INTO test_comment VALUES (6, 5, 'Nakai', '話あってよりいい結果を得られる', SYSDATE -4/24, 0);
+INSERT INTO test_comment VALUES (7, 5, 'Oikawa', 'また一緒にやろう', SYSDATE -4/24 , 0);
+INSERT INTO test_comment VALUES (8, 5, 'Maruyama', 'よろしく', SYSDATE -4/24, 0);
+INSERT INTO test_comment VALUES (9, 5, 'Alex', 'チームプレイ役割分担大事', SYSDATE -4/24, 0);
+INSERT INTO test_comment VALUES (10, 5, 'Nakai', '話あってよりいい結果を得られる', SYSDATE -4/24, 0);
+INSERT INTO test_comment VALUES (11, 5, 'Oikawa', 'また一緒にやろう', SYSDATE -4/24 , 0);
+INSERT INTO test_comment VALUES (12, 5, 'Maruyama', 'よろしく', SYSDATE -4/24, 0);
+INSERT INTO test_comment VALUES (13, 5, 'Alex', 'チームプレイ役割分担大事', SYSDATE -4/24, 0);
+INSERT INTO test_comment VALUES (14, 5, 'Nakai', '話あってよりいい結果を得られる', SYSDATE -4/24, 0);
+INSERT INTO test_comment VALUES (15, 5, 'Oikawa', 'また一緒にやろう', SYSDATE -4/24 , 0);
+INSERT INTO test_comment VALUES (16, 5, 'Maruyama', 'よろしく', SYSDATE -4/24, 0);
+INSERT INTO test_comment VALUES (17, 5, 'Alex', 'チームプレイ役割分担大事', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (18, 5, 'Nakai', '話あってよりいい結果を得られる', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (19, 5, 'Oikawa', 'また一緒にやろう', SYSDATE -3/24 , 0);
+INSERT INTO test_comment VALUES (20, 5, 'Maruyama', 'よろしく', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (21, 5, 'Alex', 'チームプレイ役割分担大事', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (22, 5, 'Nakai', '話あってよりいい結果を得られる', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (23, 5, 'Oikawa', 'また一緒にやろう', SYSDATE -3/24 , 0);
+INSERT INTO test_comment VALUES (24, 5, 'Maruyama', 'よろしく', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (25, 5, 'Alex', 'チームプレイ役割分担大事', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (26, 5, 'Nakai', '話あってよりいい結果を得られる', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (27, 5, 'Oikawa', 'また一緒にやろう', SYSDATE -3/24 , 0);
+INSERT INTO test_comment VALUES (28, 5, 'Maruyama', 'よろしく', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (29, 5, 'Alex', 'チームプレイ役割分担大事', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (30, 5, 'Nakai', '話あってよりいい結果を得られる', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (31, 5, 'Oikawa', 'また一緒にやろう', SYSDATE -3/24 , 0);
+INSERT INTO test_comment VALUES (32, 5, 'Maruyama', 'よろしく', SYSDATE -3/24, 0);
 
 UPDATE test_thread SET reply_nb = 1 WHERE thread_id = 1;
 UPDATE test_thread SET reply_nb = 2 WHERE thread_id = 2;
 UPDATE test_thread SET reply_nb = 3 WHERE thread_id = 3;
 UPDATE test_thread SET reply_nb = 1 WHERE thread_id = 4;
+UPDATE test_thread SET reply_nb = 31 WHERE thread_id = 5;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 6;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 7;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 8;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 9;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 10;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 11;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 12;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 13;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 14;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 15;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 16;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 17;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 18;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 19;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 20;
+UPDATE test_thread SET reply_nb = 0 WHERE thread_id = 21;
+
+
 
 commit;
