@@ -160,7 +160,7 @@ public class Query {
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT comment_id, commenter,"
 				+ " content, TO_CHAR(created_date,'yyyy-mm-dd HH24:MI'),"
-				+ " isDeleted FROM test_comment WHERE thread_id = "+threadId+" ORDER BY created_date");
+				+ " isDeleted FROM test_comment WHERE thread_id = "+threadId+" ORDER BY comment_id");
 
 		while(rs.next()){
 			String commentId = rs.getString(1);
