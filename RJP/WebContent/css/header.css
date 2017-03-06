@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+html, body, div, form, button, input {
+	margin: 0;
+	padding: 0;
+}
+ul {
+	padding:0;
+	margin:0;
+	list-style-type:none;
+}
+li {
+	float: left;
+	border-left: 1px solid black;
+	width: 60px;
+	margin-top: 7px;
+	height: 20px;
+}
+#welcome {
+	width: auto;
+
+}
+.headerLeftLi {
+	border-left: none;
+}
+.marginLeftLi {
+	margin-left: 10px;
+}
+#header {
+	background: #ececec none repeat;
+	width: 100%;
+	height: 35px;
+	top: 0;
+	position: fixed;
+}
+.link {
+	text-decoration: underline;
+	cursor: pointer;
+	margin-left : 10px;
+	margin-top: 5px;
+}
+.link:hover {
+	text-decoration: none;
+}
+#logoutBtn {
+	background: none!important;
+	border: none;
+	padding: 0!important;
+	font: inherit;
+    border-bottom: 1px solid #444;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: -1px;
+}
+#logoutBtn:hover {
+	border: none;
+}

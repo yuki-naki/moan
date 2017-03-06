@@ -1,0 +1,86 @@
+DROP SEQUENCE test_comment_seq;
+DROP TABLE test_comment;
+DROP SEQUENCE test_thread_seq;
+DROP TABLE test_thread;
+DROP SEQUENCE test_user_seq;
+DROP TABLE test_admin;
+DROP TABLE test_user;
+
+
+CREATE TABLE test_user(
+ user_id NUMBER(4),
+ username VARCHAR2(20) UNIQUE NOT NULL,
+ password VARCHAR2(20) NOT NULL,
+ CONSTRAINT user_id_pk PRIMARY KEY(user_id)
+);
+
+CREATE SEQUENCE test_user_seq;
+
+INSERT INTO test_user VALUES (test_user_seq.nextVal, 'Alex', 'Alex');
+INSERT INTO test_user VALUES (test_user_seq.nextVal, 'Maruyama', 'Maruyama');
+INSERT INTO test_user VALUES (test_user_seq.nextVal, 'Nakai', 'Nakai');
+INSERT INTO test_user VALUES (test_user_seq.nextVal, 'Oikawa', 'Oikawa');
+
+CREATE TABLE test_admin(
+ admin_name VARCHAR2(20) UNIQUE NOT NULL,
+ admin_pass VARCHAR2(20) NOT NULL
+);
+
+INSERT INTO test_admin VALUES ('Alex', 'Alex');
+INSERT INTO test_admin VALUES ('Maruyama', 'Maruyama');
+INSERT INTO test_admin VALUES ('Oikawa', 'Oikawa');
+
+CREATE TABLE test_thread(
+ thread_id NUMBER(4),
+ title VARCHAR2(50) NOT NULL UNIQUE,
+ creator VARCHAR2(20) NOT NULL,
+ created_date DATE DEFAULT SYSDATE NOT NULL,
+ last_update DATE DEFAULT SYSDATE NOT NULL,
+ last_user VARCHAR2(20) NOT NULL,
+ reply_nb NUMBER(4) DEFAULT 0 NOT NULL,
+ CONSTRAINT thread_id_pk PRIMARY KEY(thread_id)
+);
+
+CREATE SEQUENCE test_thread_seq;
+
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'この学校素晴らしいなぁ', 'Maruyama', SYSDATE -2/24, SYSDATE -1/24, 'Maruyama', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'MoanBBS', 'Oikawa', SYSDATE -4/24, SYSDATE -1/24, 'Oikawa', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, 'Moan', 'Alex', SYSDATE -3/24, SYSDATE, 'Alex', 0);
+INSERT INTO test_thread VALUES (test_thread_seq.nextVal, '学校生活', 'Nakai', SYSDATE -4/24, SYSDATE -3/24, 'Nakai', 0);
+
+
+CREATE TABLE test_comment(
+ comment_id NUMBER(4),
+ thread_id NUMBER(4),
+ commenter VARCHAR2(20),
+ content VARCHAR2(4000) NOT NULL,
+ created_date DATE DEFAULT SYSDATE NOT NULL,
+ isDeleted NUMBER(1) DEFAULT 0 CONSTRAINT check_is_deleted CHECK (isDeleted IN (0,1)),
+ CONSTRAINT comment_id_pk PRIMARY KEY(comment_id, thread_id),
+ CONSTRAINT comment_thread_id_fk FOREIGN KEY(thread_id) REFERENCES test_thread(thread_id) ON DELETE CASCADE
+);
+
+CREATE SEQUENCE test_comment_seq;
+
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Maruyama', 'クラスメート最高', SYSDATE -2/24 , 0);
+INSERT INTO test_comment VALUES (test_comment_seq.nextVal, 1, 'Oikawa', '友達いっぱい', SYSDATE -1/24, 0);
+
+
+INSERT INTO test_comment VALUES (1, 2, 'Oikawa', '制作お疲れ様', SYSDATE -4/24 , 0);
+INSERT INTO test_comment VALUES (2, 2, 'Maruyama', '今夜はゆっくり寝よう', SYSDATE -2/24, 0);
+INSERT INTO test_comment VALUES (3, 2, 'Alex', 'おつかれ', SYSDATE -1/24, 0);
+
+INSERT INTO test_comment VALUES (1, 3, 'Alex', 'チームプレイ役割分担大事', SYSDATE -3/24, 0);
+INSERT INTO test_comment VALUES (2, 3, 'Nakai', '話あってよりいい結果を得られる', SYSDATE -2/24, 0);
+INSERT INTO test_comment VALUES (3, 3, 'Oikawa', 'また一緒にやろう', SYSDATE -1/24 , 0);
+INSERT INTO test_comment VALUES (4, 3, 'Maruyama', 'よろしく', SYSDATE, 0);
+
+INSERT INTO test_comment VALUES (1, 4, 'Nakai', '色んな体験できる', SYSDATE -4/24 , 0);
+INSERT INTO test_comment VALUES (2, 4, 'Alex', '就職も頑張ろう', SYSDATE -3/24, 0);
+
+UPDATE test_thread SET reply_nb = 1 WHERE thread_id = 1;
+UPDATE test_thread SET reply_nb = 2 WHERE thread_id = 2;
+UPDATE test_thread SET reply_nb = 3 WHERE thread_id = 3;
+UPDATE test_thread SET reply_nb = 1 WHERE thread_id = 4;
+
+commit;
