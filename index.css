@@ -1,0 +1,205 @@
+@CHARSET "UTF-8";
+html, body, div, form, button, input {
+	margin: 0;
+	padding: 0;
+}
+tr, td, th {
+	border: 1px solid grey;
+}
+tr {
+	height: 25px;
+}
+h1 {
+	margin: 20px;
+}
+a:hover {
+	text-decoration: none;
+}
+textarea {
+	resize: none;
+}
+#searchForm {
+	margin-bottom:10px;
+	height:24px;
+}
+#searchInput {
+	width: 300px;
+	height: 22px;
+	float:left;
+	margin-right:5px;
+}
+#searchInput:FOCUS {
+	background: white none repeat scroll 0 0;
+}
+#searchBtn {
+	background-image: url("../img/search.png");
+	cursor: pointer;
+	width: 22px;
+	height: 24px;
+	border: 1px solid grey;
+	float:left;
+	margin-right:10px;
+}
+#searchBtn:hover {
+	background-image: url("../img/searchMouseOver.png");
+}
+#searchResult{
+	line-height:24px;
+}
+#searchResultNb{
+	color:#FF0088;
+}
+#threadTable {
+	width:730;
+	margin-top: 20px;
+	width: 100%;
+	border: 1px double grey;
+}
+#titleDiv {
+	width: 129px;
+}
+#creatorDiv {
+	width: 141px;
+}
+#replyDiv {
+	width: 124px;
+}
+#createdDateDiv {
+	width: 70px;
+}
+#lastUserDiv {
+	width: 103px;
+}
+#lastUpdateDiv {
+	width: 103px;
+}
+.sortDiv{
+	margin-right:auto;
+	margin-left:auto;
+	height:25px;
+}
+.sortSpan {
+	float:left;
+	line-height: 25px;
+	margin-right:5px;
+}
+.sortBtn {
+	background-repeat:no-repeat;
+	cursor: pointer;
+	width: 14px;
+	height: 14px;
+	border-style:none;
+	float:left;
+	margin-top:6px;
+}
+.sortAsc {
+	background-image: url("../img/sort.jpg");
+}
+.sortDesc {
+	background-image: url("../img/sortDesc.jpg");
+}
+.threadTd {
+	text-align: center;
+}
+#titleTd {
+	width: 30%;
+}
+#dateTd {
+	width: 20%;
+}
+.newThreadForm {
+	margin-top: 10px;
+}
+#title{
+text-align:center;
+font-size:42px;
+color :#FF0088;
+margin-top: 75px;
+}
+#threadTable{
+	margin:auto;
+	background-color:#003399;
+}
+#newThreadTable{
+margin-left:auto;
+margin-right:auto;
+background-color:#003399;
+display:none;
+width:600px;
+height:285px;
+}
+#threadLine{
+text-align:right;
+background-color:#FFFFFF;
+font-size: 16px;
+}
+
+#comment{
+text-align:left;
+font-size:12;
+}
+.res_line{
+background-color:#FFFFFF;
+text-align:center;
+font-size:16px;
+height:30px;
+}
+.center{
+text-align:center;
+}
+.threadsCenter{
+width:90%;
+margin-left:auto;
+margin-right:auto;
+}
+#newThreadBtn {
+	width: 94px;
+	margin-top:5px;
+}
+#newThreadBtnError {
+	color: red;
+	display: none;
+	width:578px;
+}
+#newThreadNameInput {
+	width: 532px;
+	height:30px;
+}
+.pageForm {
+	display: inline-block;
+	margin-bottom: 10px;
+}
+#deleteThreadBtn {
+	margin-top: 5px;
+	width: 94px;
+}
+#page {
+	font-size: 16px;
+}
+#newThreadTxtArea{
+	width:528px;
+	height:204px;
+}
+.newThreadTdInput{
+	width:535px;
+}
+.newThreadTd {
+	width:auto;
+}
+.newThreadTdTxtArea{
+	height: 216px;
+}
+#submitNewThreadDiv{
+	margin-left:auto;
+	margin-right:auto;
+	display:none;
+	width:602px;
+	height:25px;
+	margin-bottom:10px;
+	margin-top:5px;
+	text-align:right;
+}
+#submitNewThreadBtn{
+	height:25px;
+	width:50px;
+}
