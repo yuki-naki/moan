@@ -27,6 +27,7 @@
 					<ul>
 						<li id="welcome" class="headerLeftLi marginLeftLi"><span>Welcome ${sessionScope.userSession.name}</span></li>
 						<li class="marginLeftLi">
+							<input type="hidden" name="page" value="${page}" />
 							<input type="hidden" name="servlet" value="${servlet}" />
 							<button type="submit" id="logoutBtn">Logout</button>
 						</li>

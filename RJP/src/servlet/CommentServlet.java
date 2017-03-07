@@ -23,15 +23,15 @@ public class CommentServlet extends HttpServlet {
 	private String threadId;
 	private String title;
 	public static final int COMMENTS_NB = 30;
-	private int commentsPage;
+	private String commentsPageString;
+
+	private UserBean user;
+	private LoginRegisterForm registerForm;
+	private LoginRegisterForm loginForm;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-
-		UserBean user = (UserBean) request.getAttribute("user");
-		LoginRegisterForm registerForm = (LoginRegisterForm) request.getAttribute("registerForm");
-		LoginRegisterForm loginForm = (LoginRegisterForm) request.getAttribute("loginForm");
 
 		String nextComments = request.getParameter("next");
 		String previousComments = request.getParameter("back");
@@ -43,22 +43,33 @@ public class CommentServlet extends HttpServlet {
 			title = request.getParameter("title");
 		}
 
+		int commentsPage;
+
 		try {
 
-			if(nextComments == null && previousComments == null){
-				if(request.getParameter("page") != null){
-					commentsPage = Integer.parseInt(request.getParameter("page"));
+			if(commentsPageString == null){
+				if(nextComments == null && previousComments == null){
+					if(request.getParameter("page") != null){
+						commentsPage = Integer.parseInt(request.getParameter("page"));
+					}
+					else {
+						commentsPage = 1;
+					}
+					request.setAttribute("page", commentsPage);
 				}
 				else {
-					commentsPage = 1;
+					user = null;
+					commentsPage = Integer.parseInt(request.getParameter("page"));
 				}
-				request.setAttribute("page", commentsPage);
 			}
 			else {
-				commentsPage = Integer.parseInt(request.getParameter("page"));
+				commentsPage = Integer.parseInt(commentsPageString);
+				commentsPageString = null;
 			}
 
-			if(user != null){
+			HttpSession session = request.getSession();
+			UserBean userSession = (UserBean) session.getAttribute("userSession");
+			if(user != null && userSession == null){
 				request.setAttribute("user", user);
 				if(registerForm != null){
 					request.setAttribute("registerForm", registerForm);
@@ -89,6 +100,11 @@ public class CommentServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 
+		user = (UserBean) request.getAttribute("user");
+		registerForm = (LoginRegisterForm) request.getAttribute("registerForm");
+		loginForm = (LoginRegisterForm) request.getAttribute("loginForm");
+		commentsPageString = (String) request.getAttribute("page");
+
 		if(request.getParameter("newComment") != null){
 
 			HttpSession session = request.getSession();
@@ -99,6 +115,7 @@ public class CommentServlet extends HttpServlet {
 
 					int threadId = Integer.parseInt(request.getParameter("threadId"));
 					String content = request.getParameter("content").replace("\n", "<br>");
+					commentsPageString = (String) request.getParameter("page");
 					Query.insertComment(threadId, user.getName(), content);
 					Query.updateThread(threadId, user.getName());
 
@@ -119,6 +136,7 @@ public class CommentServlet extends HttpServlet {
 				try {
 					int commentId = Integer.parseInt(request.getParameter("commentId"));
 					int threadId = Integer.parseInt(request.getParameter("threadId"));
+					commentsPageString = (String) request.getParameter("page");
 					String content = request.getParameter("content").replace("\n", "<br>");
 					Query.updateComment(threadId, commentId, content);
 
@@ -138,6 +156,7 @@ public class CommentServlet extends HttpServlet {
 
 				try {
 					int commentId = Integer.parseInt(request.getParameter("commentId"));
+					commentsPageString = (String) request.getParameter("page");
 					String content;
 					if(user.getIsAdmin()){
 						content = "このコメントはアドミンに消された。";

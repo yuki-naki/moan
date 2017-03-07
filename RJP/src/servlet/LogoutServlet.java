@@ -16,8 +16,10 @@ public class LogoutServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		String servlet = request.getParameter("servlet");
-
+		String page = request.getParameter("page");
 		session.invalidate();
-		response.sendRedirect(request.getContextPath() + servlet);
+		//response.sendRedirect(request.getContextPath() + servlet);
+		request.setAttribute("page", page);
+		request.getRequestDispatcher(servlet).forward(request, response);
 	}
 }

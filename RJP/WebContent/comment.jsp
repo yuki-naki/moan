@@ -27,11 +27,10 @@
 			</p>
 			<form method="post" action="${pageContext.request.contextPath}/comments">
 				<input type="hidden" name="commentId" value="${comment.commentId}" />
+				<input type="hidden" name="page" value="${page}" />
 				<p class="content">
 					<c:out value="${comment.content}" escapeXml="false" /><br>
-					<c:if test="${status.last && comment.commenter eq sessionScope.userSession.name}">
-						<c:set var="isLast" value="${true}"/>
-						<c:set var="commentId" value="${comment.commentId}"></c:set>
+					<c:if test="${fn:length(comments) - 1 == status.index && comment.commenter eq sessionScope.userSession.name}">
 						<c:if test="${! comment.isDeleted}">
 							<button type="button" class="updateDeleteBtn" data-content="${comment.content}" id="updateCommentBtn">Update</button><br>
 						</c:if>
@@ -75,14 +74,15 @@
 		<td id="comment">
 		<textarea id="textareaComment" cols="100%" rows=15 name="content" placeholder="ここに文書を入力してください"></textarea>
 		<input type="hidden" name="threadId" value="${threadId}" />
-		<input type="hidden" name="commentId" value="${commentId}" />
+		<input type="hidden" name="commentId" value="${comments[fn:length(comments)-1].commentId}" />
 		</td>
 	</tr>
 	<tr id="newCommentRow">
 		<td></td>
 		<td id="newCommentCol">
 			<div class="spancolor">
-				<input id="newCommentBtn" ${isLast || empty sessionScope.userSession ? "disabled='disabled'" : ''} type="submit" value="書き込む" name="newComment">
+				<input type="hidden" name="page" value="${page}" />
+				<input id="newCommentBtn" ${(! comments[fn:length(comments)-1].isDeleted && comments[fn:length(comments)-1].commenter == sessionScope.userSession.name) || empty sessionScope.userSession ? "disabled='disabled'" : ''} type="submit" value="書き込む" name="newComment">
 				<span id="newCommentBtnError" class="${not empty sessionScope.userSession ? 'disabled' : ''}">新しいコメントを作成するにはログインする必要があります。</span>
 			</div>
 		</td>

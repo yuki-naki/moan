@@ -56,22 +56,22 @@ textarea {
 	border: 1px double grey;
 }
 #titleDiv {
-	width: 129px;
+	width: 150px;
 }
 #creatorDiv {
-	width: 141px;
+	width: 150px;
 }
 #replyDiv {
-	width: 124px;
+	width: 135px;
 }
 #createdDateDiv {
 	width: 70px;
 }
 #lastUserDiv {
-	width: 103px;
+	width: 104px;
 }
 #lastUpdateDiv {
-	width: 103px;
+	width: 104px;
 }
 .sortDiv{
 	margin-right:auto;
@@ -125,8 +125,8 @@ margin-left:auto;
 margin-right:auto;
 background-color:#003399;
 display:none;
-width:578px;
-height:253px;
+width:600px;
+height:285px;
 }
 #threadLine{
 text-align:right;
@@ -159,10 +159,11 @@ margin-right:auto;
 #newThreadBtnError {
 	color: red;
 	display: none;
-	width:578;
+	width:578px;
 }
 #newThreadNameInput {
-	width: 512px;
+	width: 532px;
+	height:30px;
 }
 .pageForm {
 	display: inline-block;
@@ -175,11 +176,24 @@ margin-right:auto;
 #page {
 	font-size: 16px;
 }
+#newThreadTxtArea{
+	width:528px;
+	height:204px;
+}
+.newThreadTdInput{
+	width:535px;
+}
+.newThreadTd {
+	width:auto;
+}
+.newThreadTdTxtArea{
+	height: 216px;
+}
 #submitNewThreadDiv{
 	margin-left:auto;
 	margin-right:auto;
 	display:none;
-	width:580px;
+	width:602px;
 	height:25px;
 	margin-bottom:10px;
 	margin-top:5px;

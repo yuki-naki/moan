@@ -30,7 +30,7 @@
 					</tr>
 					<tr>
 						<td><label for="nameRegister">ユーザー名</label></td>
-						<td><input type="text" class="loginFormInput" id="nameRegister" name="nameRegister" value="<c:out value="${user.name}"/>" /></td>
+						<td><input type="text" class="loginFormInput" id="nameRegister" name="nameRegister" value="${not empty registerForm.errors ? user.name : ''}" /></td>
 					</tr>
 					<tr>
 						<td colspan="2"><span class="error">${registerForm.errors['passRegister']}</span></td>
@@ -50,6 +50,7 @@
 						<td></td>
 						<td>
 							<input type="hidden" name="servlet" value="${servlet}" />
+							<input type="hidden" name="page" value="${page}" />
 							<input class="loginFormSubmit" type="submit" value="Register" name="register"/>
 						</td>
 					</tr>
@@ -77,7 +78,7 @@
 					</tr>
 					<tr>
 						<td><label for="nameLogin">ユーザー名　</label></td>
-						<td><input type="text" id="nameLogin" class="loginFormInput" name="nameLogin" /></td>
+						<td><input type="text" id="nameLogin" class="loginFormInput" name="nameLogin" value="${not empty loginForm.errors ? user.name : ''}" /></td>
 					</tr>
 					<tr>
 						 <td colspan="2"><span class="error">${loginForm.errors['passLogin']}</span></td>
@@ -90,6 +91,7 @@
 						<td></td>
 						<td>
 							<!--<input type="hidden" name="servlet" value="${pageContext.request.servletPath}" />-->
+							<input type="hidden" name="page" value="${page}" />
 							<input type="hidden" name="servlet" value="${servlet}" />
 							<input class="loginFormSubmit" type="submit" value="Login" name="login"/>
 						</td>

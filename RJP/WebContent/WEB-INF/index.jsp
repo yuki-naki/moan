@@ -37,7 +37,7 @@
 	<input type="text" name="searchInput" id="searchInput" placeholder="スレッドキーワード" value="${searchTxt}">
 	<button id="searchBtn"></button>
 	<c:if test="${fn:trim(searchTxt) != '' }">
-		<div id="searchResult"><span id="searchResultNb"><c:out value="${fn:length(threads)}" /></span>件が見つかれました</div>
+		<div id="searchResult"><span id="searchResultNb"><c:out value="${fn:length(threads)}" /></span>件が見つかりました</div>
 	</c:if>
 </form>
 
@@ -52,32 +52,32 @@
 		</c:if>
 		<th class="center">
 			<div id="titleDiv" class="sortDiv">
-				<span class="sortSpan">スレッドタイトル</span> <button name="titleSort" id="titleSortBtn" value="${titleAscSort}" class="${titleAscSort ? 'sortBtn sortAsc' : 'sortBtn sortDesc'}"></button>
+				<span class="sortSpan">スレッドタイトル</span> <button name="titleSort" id="titleSortBtn" value="${titleAscSort}" class="${selectedSort == 'title' ? 'sortBtn sortDesc' : 'sortBtn sortAsc'}"></button>
 			</div>
 		</th>
 		<th class="center">
 			<div id="creatorDiv" class="sortDiv">
-				<span class="sortSpan">スレッド作成者名</span> <button name="creatorSort" id="creatorSortBtn" value="${creatorAscSort}" class="${creatorAscSort ? 'sortBtn sortAsc' : 'sortBtn sortDesc'}"></button>
+				<span class="sortSpan">スレッド作成者名</span> <button name="creatorSort" id="creatorSortBtn" value="${creatorAscSort}" class="${selectedSort == 'creator' ? 'sortBtn sortDesc' : 'sortBtn sortAsc'}"></button>
 			</div>
 		</th>
 		<th class="center">
 			<div id="replyDiv" class="sortDiv">
-				<span class="sortSpan">スレッド返信数</span> <button name="replySort" id="replySortBtn" value="${replyAscSort}" class="${replyAscSort ? 'sortBtn sortAsc' : 'sortBtn sortDesc'}"></button>
+				<span class="sortSpan">スレッド返信数</span> <button name="replySort" id="replySortBtn" value="${replyAscSort}" class="${selectedSort == 'reply' ? 'sortBtn sortDesc' : 'sortBtn sortAsc'}"></button>
 			</div>
 		</th>
 		<th class="center">
 			<div id="createdDateDiv" class="sortDiv">
-				<span class="sortSpan">作成日</span> <button name="createdDateSort" id="createdDateSortBtn" value="${createdDateAscSort}" class="${createdDateAscSort ? 'sortBtn sortAsc' : 'sortBtn sortDesc'}"></button>
+				<span class="sortSpan">作成日</span> <button name="createdDateSort" id="createdDateSortBtn" value="${createdDateAscSort}" class="${selectedSort == 'createdDate' ? 'sortBtn sortDesc' : 'sortBtn sortAsc'}"></button>
 			</div>
 		</th>
 		<th class="center">
 			<div id="lastUserDiv" class="sortDiv">
-				<span class="sortSpan">最終作成者</span> <button name="lastUserSort" id="lastUserSortBtn" value="${lastUserAscSort}" class="${lastUserAscSort ? 'sortBtn sortAsc' : 'sortBtn sortDesc'}"></button>
+				<span class="sortSpan">最終作成者</span> <button name="lastUserSort" id="lastUserSortBtn" value="${lastUserAscSort}" class="${selectedSort == 'lastUser' ? 'sortBtn sortDesc' : 'sortBtn sortAsc'}"></button>
 			</div>
 		</th>
 		<th class="center">
 			<div id="lastUpdateDiv" class="sortDiv">
-				<span class="sortSpan">最終更新日</span> <button name="lastUpdateSort" id="lastUpdateSortBtn" value="${lastUpdateAscSort}" class="${lastUpdateAscSort ? 'sortBtn sortAsc' : 'sortBtn sortDesc'}"></button>
+				<span class="sortSpan">最終更新日</span> <button name="lastUpdateSort" id="lastUpdateSortBtn" value="${lastUpdateAscSort}" class="${selectedSort == 'lastUpdate' ? 'sortBtn sortDesc' : 'sortBtn sortAsc'}"></button>
 			</div>
 		</th>
 	</tr>
@@ -164,24 +164,24 @@
 <table id="newThreadTable">
 
 <tr id="threadLine">
-<td class="center">名前</td>
+<td class="center newThreadTd">名前</td>
 <td id="comment" >
 ${sessionScope.userSession.name}
 </td>
 </tr>
 
 <tr id="threadLine" >
-<td class="center">タイトル</td>
-<td id="comment" >
+<td class="center newThreadTd">タイトル</td>
+<td id="comment" class="newThreadTdInput">
 <input type="text" name="title" id="newThreadNameInput">
 </td>
 </tr>
 
-<tr id="threadLine">
-<td class="center">本文</td>
+<tr id="threadLine" class="newThreadTdTxtArea">
+<td class="center newThreadTd">本文</td>
 
 <td id="comment">
-<textarea name="content" cols="60" rows="10"></textarea>
+<textarea id="newThreadTxtArea" name="content" cols="60" rows="10"></textarea>
 </td>
 </tr>
 </table>

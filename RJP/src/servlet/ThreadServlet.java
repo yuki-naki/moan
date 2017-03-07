@@ -22,7 +22,7 @@ import sql.Query;
 public class ThreadServlet extends HttpServlet {
 
 	public static final int THREADS_NB = 20;
-	private int threadsPage;
+	private String threadsPageString;
 	private boolean titleAscSort = true;
 	private boolean creatorAscSort = true;
 	private boolean replyAscSort = true;
@@ -30,13 +30,13 @@ public class ThreadServlet extends HttpServlet {
 	private boolean lastUserAscSort = true;
 	private boolean lastUpdateAscSort = false;
 
+	private UserBean user;
+	private LoginRegisterForm registerForm;
+	private LoginRegisterForm loginForm;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-
-		UserBean user = (UserBean) request.getAttribute("user");
-		LoginRegisterForm registerForm = (LoginRegisterForm) request.getAttribute("registerForm");
-		LoginRegisterForm loginForm = (LoginRegisterForm) request.getAttribute("loginForm");
 
 		String searchTxt = request.getParameter("searchInput");
 
@@ -61,20 +61,28 @@ public class ThreadServlet extends HttpServlet {
 
 
 		List<ThreadBean> threads;
+		int threadsPage;
 
 		try {
 
-			if(nextThreads == null && previousThreads == null){
-				if(request.getParameter("page") != null){
-					threadsPage = Integer.parseInt(request.getParameter("page"));
+			if(threadsPageString == null){
+				if(nextThreads == null && previousThreads == null){
+					if(request.getParameter("page") != null){
+						threadsPage = Integer.parseInt(request.getParameter("page"));
+					}
+					else {
+						threadsPage = 1;
+					}
+					request.setAttribute("page", threadsPage);
 				}
 				else {
-					threadsPage = 1;
+					threadsPage = Integer.parseInt(request.getParameter("page"));
+					user = null;
 				}
-				request.setAttribute("page", threadsPage);
 			}
 			else {
-				threadsPage = Integer.parseInt(request.getParameter("page"));
+				threadsPage = Integer.parseInt(threadsPageString);
+				threadsPageString = null;
 			}
 
 			if(checkboxes != null){
@@ -192,6 +200,9 @@ public class ThreadServlet extends HttpServlet {
 				}
 				request.setAttribute("selectedSort", "lastUpdate");
 			}
+			else {
+				request.setAttribute("selectedSort", "lastUpdate");
+			}
 
 			request.setAttribute("titleAscSort", titleAscSort);
 			request.setAttribute("creatorAscSort", creatorAscSort);
@@ -205,7 +216,9 @@ public class ThreadServlet extends HttpServlet {
 			request.setAttribute("page", threadsPage);
 			request.setAttribute("servlet", "/threads");
 
-			if(user != null){
+			HttpSession session = request.getSession();
+			UserBean userSession = (UserBean) session.getAttribute("userSession");
+			if(user != null && userSession == null){
 				request.setAttribute("user", user);
 				if(registerForm != null){
 					request.setAttribute("registerForm", registerForm);
@@ -227,20 +240,26 @@ public class ThreadServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 
+		user = (UserBean) request.getAttribute("user");
+		registerForm = (LoginRegisterForm) request.getAttribute("registerForm");
+		loginForm = (LoginRegisterForm) request.getAttribute("loginForm");
+		threadsPageString = (String) request.getAttribute("page");
+
 		if(request.getParameter("newThread") != null){
 			HttpSession session = request.getSession();
 			String title = request.getParameter("title");
-			String content = request.getParameter("content");
+			String content = request.getParameter("content").replace("\n", "<br>");
+			if(title != null && ! title.trim().equals("") && content != null && ! content.trim().equals("")){
+				UserBean user = (UserBean) session.getAttribute("userSession");
 
-			UserBean user = (UserBean) session.getAttribute("userSession");
+				try {
 
-			try {
-
-				int threadId = Query.insertThread(user.getName(), title);
-				Query.insertComment(threadId, user.getName(), content);
-			}
-			catch (SQLException e) {
-				e.printStackTrace();
+					int threadId = Query.insertThread(user.getName(), title);
+					Query.insertComment(threadId, user.getName(), content);
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		response.sendRedirect(getServletContext().getContextPath()+"/threads");

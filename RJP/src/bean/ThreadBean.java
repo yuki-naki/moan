@@ -1,9 +1,11 @@
 package bean;
 
+import java.text.Collator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Locale;
 
 public class ThreadBean {
 
@@ -79,22 +81,25 @@ public class ThreadBean {
 	public static Comparator<ThreadBean> titleComparator = new Comparator<ThreadBean>() {
 
 		public int compare(ThreadBean t1, ThreadBean t2) {
-		   String title1 = t1.getTitle();
-		   String title2 = t2.getTitle();
 
-		   //ascending order
-		   return title1.compareTo(title2);
+			Collator collator = Collator.getInstance(Locale.JAPANESE);
+		    String title1 = t1.getTitle();
+		    String title2 = t2.getTitle();
+
+		    return collator.compare(title1, title2);
 	    }
 	};
 
 	public static Comparator<ThreadBean> creatorComparator = new Comparator<ThreadBean>() {
 
 		public int compare(ThreadBean t1, ThreadBean t2) {
-		   String creator1 = t1.getCreator();
-		   String creator2 = t2.getCreator();
+
+			Collator collator = Collator.getInstance(Locale.JAPANESE);
+		    String creator1 = t1.getCreator();
+		    String creator2 = t2.getCreator();
 
 		   //ascending order
-		   return creator1.compareTo(creator2);
+		   return collator.compare(creator1, creator2);
 	    }
 	};
 
@@ -135,11 +140,13 @@ public class ThreadBean {
 	public static Comparator<ThreadBean> lastUserComparator = new Comparator<ThreadBean>() {
 
 		public int compare(ThreadBean t1, ThreadBean t2) {
-		   String lastUser1 = t1.getLastUser();
-		   String lastUser2 = t2.getLastUser();
+
+			Collator collator = Collator.getInstance(Locale.JAPANESE);
+		    String lastUser1 = t1.getLastUser();
+		    String lastUser2 = t2.getLastUser();
 
 		   //ascending order
-		   return lastUser1.compareTo(lastUser2);
+		   return collator.compare(lastUser1, lastUser2);
 	    }
 	};
 

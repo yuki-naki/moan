@@ -23,9 +23,12 @@ public class LoginRegisterServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+
 		HttpSession session = request.getSession();
 		String register = request.getParameter("register");
 		String servlet = request.getParameter("servlet");
+		String page = request.getParameter("page");
 
 		LoginRegisterForm form = new LoginRegisterForm();
 		UserBean user;
@@ -46,8 +49,10 @@ public class LoginRegisterServlet extends HttpServlet {
             session.setAttribute(USER_SESSION, null);
         }
 
+		request.setAttribute("page", page);
 		request.setAttribute(USER, user);
 
-		response.sendRedirect(getServletContext().getContextPath()+servlet);
+		//response.sendRedirect(getServletContext().getContextPath()+servlet);
+		request.getRequestDispatcher(servlet).forward(request, response);
 	}
 }
